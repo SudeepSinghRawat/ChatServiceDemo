@@ -42,11 +42,12 @@ public class ChatController {
 		
 	}
 	
-	@RequestMapping(value="" , method =RequestMethod.POST , produces = MediaType.APPLICATION_JSON_UTF8_VALUE , consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@RequestMapping(value="/save" , method =RequestMethod.POST , produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<Map<String,Integer>> saveSave(@RequestBody ChatRequest newChat) {
 		int i  = chatService.addChat(newChat);
 		Map<String, Integer> myRespose = new HashMap<>();
 		myRespose.put("id", i);
+		System.out.println(myRespose);
 		return new ResponseEntity<Map<String,Integer>>(myRespose, HttpStatus.OK);
 		//return new ResponseEntity<Integer>(i, HttpStatus.OK);
 	}

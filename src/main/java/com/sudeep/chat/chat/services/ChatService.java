@@ -36,7 +36,9 @@ public class ChatService {
 		
 		if(id >= 1000) {
 			for(ChatModel cM: expireMessage) {
+				System.out.println(cM);
 				if(cM.getId() == id) {
+					
 					chatModel = cM;
 					break;
 				}
@@ -44,13 +46,15 @@ public class ChatService {
 		}
 		else {
 			for(ChatModel cM: notExpireMessage) {
+				System.out.println(cM);
 				if(cM.getId() == id) {
 					chatModel = cM;
 					break;
 				}
 			}
 		}
-		
+		System.out.println("im here");
+		System.out.println(chatModel);
 		return chatModel;
 	}
 	 
@@ -69,13 +73,16 @@ public class ChatService {
 	 }
 	 
 	 public int addChat(ChatRequest chat) {
-		 int id = expireMessage.size()+1;
+		 int id = expireMessage.get(expireMessage.size()-1).getId()+1;
+		 //int id = (expireMessage.size()+1;
 		 ChatModel newChat  = new ChatModel();
 		 newChat.setId(id);
 		 newChat.setText(chat.getText());
 		 newChat.setUserName(chat.getUserName());
 		 newChat.setDate(ChatUtil.getTime(chat.getTimeout()));
 		 expireMessage.add(newChat);
+		 System.out.println(newChat);
+		 System.out.println(expireMessage);
 		 return id;
 	 }
 
